@@ -119,21 +119,16 @@ Esta prueba revisa la lógica del reproductor sin abrir la ventana y sin usar la
 
 ## Cómo correrlo
 
-### Con las canciones de prueba
+### Con la música de prueba
 
-El repositorio ya trae seis canciones de prueba en `musica/`. Son melodías sintetizadas, así que no tienen derechos de autor.
+El repositorio ya trae seis piezas cortas en `musica/`. Son grabaciones de música clásica de **dominio público o CC0**,
+del proyecto Musopen, publicadas en Wikimedia Commons (ver [Créditos de la música](#créditos-de-la-música)).
 
 ```bash
 python reproductor.py musica
 ```
 
 Se abre la ventana con las seis canciones en la lista. Presiona **▶ Reproducir**.
-
-Si borraste la carpeta `musica/`, vuelve a generarla con:
-
-```bash
-python generar_musica.py
-```
 
 ### Con tu propia música
 
@@ -155,7 +150,6 @@ python reproductor.py "/ruta/a/mi/musica"
 | `python reproductor.py` | Abre el reproductor vacío. |
 | `python reproductor.py <carpeta>` | Abre el reproductor con esa carpeta cargada. |
 | `python reproductor.py --prueba` | Autoverificación de la lógica. |
-| `python generar_musica.py [carpeta]` | Genera las 6 canciones de prueba (por defecto en `musica/`). |
 | `python capturas_gui.py <carpeta>` | Toma capturas de la ventana en cada estado (solo macOS; suena música). |
 
 ---
@@ -165,9 +159,8 @@ python reproductor.py "/ruta/a/mi/musica"
 ```text
 .
 ├── reproductor.py       # aplicación: clases Reproductor (lógica + pygame.mixer) e Interfaz (tkinter)
-├── generar_musica.py    # sintetiza las canciones de prueba (solo biblioteca estándar)
 ├── capturas_gui.py      # capturas automáticas de la ventana para el reporte (macOS)
-├── musica/              # 6 canciones WAV de prueba
+├── musica/              # 6 piezas .ogg de dominio público (4.2 MB) + CREDITOS.md y fuentes.tsv
 ├── requirements.txt     # pygame
 └── README.md
 ```
@@ -177,6 +170,25 @@ python reproductor.py "/ruta/a/mi/musica"
 - **`Reproductor`** guarda la lista de canciones, la canción actual y el estado (`detenido`, `reproduciendo` o `pausado`). Es la única clase que llama a `pygame.mixer`. Mide el tiempo reproducido con `time.monotonic()`, así el reloj se congela en pausa y vuelve a cero al detener.
 - **`Interfaz`** construye la ventana. Cada botón llama a un método de `Reproductor` y luego vuelve a dibujar la pantalla. Con `raiz.after(250, …)` la pantalla se actualiza cuatro veces por segundo sin bloquear la ventana, y en esa misma revisión se detecta cuándo termina una canción.
 - **Siguiente y anterior** calculan el nuevo índice con `(indice ± 1) % len(canciones)`. Es una operación O(1) y hace que la lista sea circular.
+
+---
+
+## Créditos de la música
+
+Las seis piezas de `musica/` son grabaciones de [Musopen](https://musopen.org) publicadas en
+[Wikimedia Commons](https://commons.wikimedia.org/wiki/Category:Musopen), con licencia de dominio público o CC0.
+Se pueden usar sin pedir permiso. Elegimos piezas cortas (29 a 64 s) y archivos chicos (menos de 1 MB cada uno).
+
+| Archivo | Obra (compositor) | Licencia |
+|---|---|---|
+| `01 Clementi - Sonatina en Do, Vivace.ogg` | Sonatina Op. 36 n.º 1, III. Vivace (Muzio Clementi); intérprete: Alessio Cesaroni | CC0 |
+| `02 Milhaud - Tambourin.ogg` | Suite d'après Corrette, II. Tambourin (Darius Milhaud) | Dominio público |
+| `03 Mussorgsky - Promenade.ogg` | Cuadros de una exposición, Promenade (Modest Músorgski) | Dominio público |
+| `04 Schumann - La gallina ciega.ogg` | Escenas infantiles, Op. 15, III (Robert Schumann) | Dominio público |
+| `05 Schumann - Caballero del caballito.ogg` | Escenas infantiles, Op. 15, IX (Robert Schumann) | Dominio público |
+| `06 Strauss - Bosques de Viena (cítara).ogg` | Cuentos de los bosques de Viena, Op. 325, solo de cítara (Johann Strauss II) | CC0 |
+
+Los enlaces a cada archivo en Commons están en [`musica/CREDITOS.md`](musica/CREDITOS.md).
 
 ---
 

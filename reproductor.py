@@ -251,14 +251,15 @@ class Interfaz:
 def prueba():
     """Revisa la lógica con el controlador de audio 'dummy' (sin bocinas ni ventana)."""
     import tempfile
-    import generar_musica
+    import wave
     with tempfile.TemporaryDirectory() as tmp:
-        for nombre, bpm, melodia in generar_musica.CANCIONES[:3]:
-            generar_musica.sintetizar(os.path.join(tmp, nombre), bpm, melodia[:4])
+        for i in (1, 2, 3):                                     # tres WAV de silencio de 2.4 s
+            with wave.open(os.path.join(tmp, f"0{i} Prueba.wav"), "wb") as w:
+                w.setparams((1, 2, 8000, 0, "NONE", "")); w.writeframes(bytes(2 * 19200))
         open(os.path.join(tmp, "notas.txt"), "w").close()       # no es audio: se ignora
         r = Reproductor()
         assert r.cargar_carpeta(tmp) == 3
-        assert r.titulo() == "01 Amanecer en Do"
+        assert r.titulo() == "01 Prueba"
         r.reproducir()
         assert r.estado == "reproduciendo"
         time.sleep(0.2)
@@ -281,7 +282,7 @@ def prueba():
         assert r.volumen == 1.0
         r.cambiar_volumen(35)
         assert abs(r.volumen - 0.35) < 1e-9
-        assert abs(r.duracion(0) - 4 * 60 / 100) < 0.01
+        assert abs(r.duracion(0) - 2.4) < 0.01
         assert formato_tiempo(83.4) == "01:23"
     print("prueba: todo correcto")
 

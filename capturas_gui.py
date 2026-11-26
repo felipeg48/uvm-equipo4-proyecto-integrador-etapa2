@@ -66,8 +66,8 @@ def main():
                        app.reproducir_seleccion()), None),
         (100, lambda: app.vol.set(25), None),
         (2600, lambda: None, "g10_volumen_y_doble_clic.png"),
-        (100, lambda: (app.r.detener(), app.r.reproducir(1)), None),     # canción 02 dura 16 s
-        (14500, lambda: None, "g11_casi_termina.png"),
+        (100, lambda: (app.r.detener(), app.r.reproducir(1)), None),     # canción 02 dura 29 s
+        (26500, lambda: None, "g11_casi_termina.png"),
         (3500, lambda: None, "g12_avance_automatico.png"),
         (100, lambda: app.r.detener(), None),
     ]
