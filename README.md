@@ -150,7 +150,6 @@ python reproductor.py "/ruta/a/mi/musica"
 | `python reproductor.py` | Abre el reproductor vacío. |
 | `python reproductor.py <carpeta>` | Abre el reproductor con esa carpeta cargada. |
 | `python reproductor.py --prueba` | Autoverificación de la lógica. |
-| `python capturas_gui.py <carpeta>` | Toma capturas de la ventana en cada estado (solo macOS; suena música). |
 
 ---
 
@@ -159,7 +158,6 @@ python reproductor.py "/ruta/a/mi/musica"
 ```text
 .
 ├── reproductor.py       # aplicación: clases Reproductor (lógica + pygame.mixer) e Interfaz (tkinter)
-├── capturas_gui.py      # capturas automáticas de la ventana para el reporte (macOS)
 ├── musica/              # 6 piezas .ogg de dominio público (4.2 MB) + CREDITOS.md y fuentes.tsv
 ├── requirements.txt     # pygame
 └── README.md
